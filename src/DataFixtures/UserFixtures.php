@@ -13,7 +13,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setFirstname('prenomuser');
         $user->setLastname('nameuser');
-        $user->setEmail('user@user.com');
+        $user->setEmail('admin@admin.com');
         $user->setPassword('$2y$13$79mYf7kUbRCKZpwgCzsF7.KN8Zr4I3VK63yOTscVOWBKem1zuUA2.');
         $user->setRoles(['ROLE_ADMIN']);
         $manager->persist($user);
