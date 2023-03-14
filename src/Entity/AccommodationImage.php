@@ -19,6 +19,10 @@ class AccommodationImage
     #[ORM\Column]
     private ?int $position = null;
 
+    #[ORM\ManyToOne(inversedBy: 'accommodationImages')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    private ?Accommodation $accommodation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class AccommodationImage
     public function setPosition(int $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getAccommodation(): ?Accommodation
+    {
+        return $this->accommodation;
+    }
+
+    public function setAccommodation(?Accommodation $accommodation): self
+    {
+        $this->accommodation = $accommodation;
 
         return $this;
     }

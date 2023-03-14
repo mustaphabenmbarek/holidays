@@ -14,7 +14,7 @@ class AccommodationImageFixtures extends Fixture implements DependentFixtureInte
         $accommodationImage = new AccommodationImage();
         $accommodationImage->setPath('image1.png');
         $accommodationImage->setPosition(1);
-        //$accommodationImage->setBooking($this->getReference(BookingFixtures::BOOKING_V));
+        $accommodationImage->setAccommodation($this->getReference(accommodationFixtures::ACCOMMODATION_REF));
         $manager->persist($accommodationImage);
 
 
@@ -24,7 +24,7 @@ class AccommodationImageFixtures extends Fixture implements DependentFixtureInte
     public function getDependencies()
     {
         return [
-            BookingFixtures::class,
+            AccommodationFixtures::class,
         ];
     }
 }

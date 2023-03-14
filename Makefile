@@ -6,5 +6,5 @@ help:
 rebuild: ## Rebuild application
 	symfony console d:d:d -f
 	symfony console d:d:c
-	symfony console d:s:u
+	symfony console d:s:u -f
 	symfony console d:f:l -n

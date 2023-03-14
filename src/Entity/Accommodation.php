@@ -37,10 +37,14 @@ class Accommodation
     #[ORM\OneToMany(mappedBy: 'accommodation', targetEntity: Rating::class, orphanRemoval: true)]
     private Collection $ratings;
 
+    #[ORM\OneToMany(mappedBy: 'accommodation', targetEntity: AccommodationImage::class, orphanRemoval: true)]
+    private Collection $accommodationImages;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
         $this->ratings = new ArrayCollection();
+        $this->accommodationImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,6 +166,36 @@ class Accommodation
             // set the owning side to null (unless already changed)
             if ($rating->getAccommodation() === $this) {
                 $rating->setAccommodation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AccommodationImage>
+     */
+    public function getAccommodationImages(): Collection
+    {
+        return $this->accommodationImages;
+    }
+
+    public function addAccommodationImage(AccommodationImage $accommodationImage): self
+    {
+        if (!$this->accommodationImages->contains($accommodationImage)) {
+            $this->accommodationImages->add($accommodationImage);
+            $accommodationImage->setAccommodation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccommodationImage(AccommodationImage $accommodationImage): self
+    {
+        if ($this->accommodationImages->removeElement($accommodationImage)) {
+            // set the owning side to null (unless already changed)
+            if ($accommodationImage->getAccommodation() === $this) {
+                $accommodationImage->setAccommodation(null);
             }
         }
 

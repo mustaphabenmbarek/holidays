@@ -8,9 +8,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class AccommodationFixtures extends Fixture
 {
+    public const ACCOMMODATION_REF = 'ACCOMMODATION_REF';
+    
     public function load(ObjectManager $manager): void
     {
-        //public const ACCOMMODATION_SUB_ACCOMMODATION = 'ACCOMMODATION_SUB_ACCOMMODATION';
         $accommodation = new Accommodation();
         $accommodation->setTitle('My Accommodation');
         $accommodation->setSlug('testslug');
@@ -19,7 +20,7 @@ class AccommodationFixtures extends Fixture
         $accommodation->setNightPrice(20.10);
 
         $manager->persist($accommodation);
-        //$this->addReference(self::ACCOMMODATION_SUB_ACCOMMODATION, $accommodation);
+        $this->addReference(self::ACCOMMODATION_REF, $accommodation);
 
         $manager->flush();
     }
