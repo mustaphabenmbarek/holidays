@@ -11,12 +11,16 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
         "easycorp/easyadmin-bundle": "^4.6",
+        "stof/doctrine-extensions-bundle": "^1.7",
         "symfony/console": "6.2.*",
         "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
+        "symfony/form": "6.2.*",
         "symfony/framework-bundle": "6.2.*",
         "symfony/runtime": "6.2.*",
         "symfony/security-bundle": "6.2.*",
+        "symfony/validator": "6.2.*",
+        "symfony/webpack-encore-bundle": "^1.16",
         "symfony/yaml": "6.2.*"
     },
     "config": {
@@ -63,7 +67,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "6.2.*",
             "docker": false
         }
