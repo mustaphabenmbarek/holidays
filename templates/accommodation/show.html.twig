@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ accommodation.title }}{% endblock %}
+
+{% block body %}
+<h1>{{ accommodation.title }}</h1>
+
+<div class="container">
+    {% for accommodation in accommodations %}
+        <div class="col">
+            <h2>{{ booking.title }}</h2>
+            <p>{{ booking.description | striptags | u.truncate(6, '...', true) }}</p>
+            <a>Voir</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

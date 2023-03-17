@@ -3,6 +3,5 @@
 stof_doctrine_extensions:
     default_locale: fr_FR
     orm:
-        entity_managers:
-            default:
-                timestampable: true
+        default:
+            timestampable: true

@@ -13,9 +13,9 @@ class AccommodationFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $accommodation = new Accommodation();
-        $accommodation->setTitle('My Accommodation');
+        $accommodation->setTitle('Mon hébergement');
         $accommodation->setSlug('testslug');
-        $accommodation->setDescription('testdescription');
+        $accommodation->setDescription('testdescriptionxxxxxxxyyyyyyy');
         $accommodation->setNbrMaxPerson(3);
         $accommodation->setNightPrice(20.10);
 

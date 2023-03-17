@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos logements{% endblock %}
+
+{% block body %}
+<h1>Nos logements</h1>
+
+<div class="row">
+    {% for accommodation in accommodations %}
+        <div class="col">
+            <h2>{{ accommodation.title }}</h2>
+            <p>{{ accommodation.description | striptags | u.truncate(6, '...', true) }}</p>
+            <a href="{{ path('app_accommodation', { id: accommodation.id })}}">Voir</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
