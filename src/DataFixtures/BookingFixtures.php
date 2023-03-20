@@ -13,7 +13,7 @@ class BookingFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $booking = new Booking();
-        $booking->setTitle('Mon logement');
+        $booking->setTitle('Maison1');
         $booking->setNbrPersons(2);
         $booking->setPrice(40.20);
         $booking->setDepartureDate(\DateTime::createFromFormat('d/m/Y', '02/01/2022'));

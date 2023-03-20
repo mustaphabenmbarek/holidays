@@ -8,8 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AccommodationRepository::class)]
+#[Vich\Uploadable]
 class Accommodation
 {
     use TimestampableEntity;
@@ -29,7 +32,7 @@ class Accommodation
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?int $NbrMaxPerson = null;
+    private ?int $nbrMaxPerson = null;
 
     #[ORM\Column]
     private ?float $nightPrice = null;
@@ -42,6 +45,13 @@ class Accommodation
 
     #[ORM\OneToMany(mappedBy: 'accommodation', targetEntity: AccommodationImage::class, orphanRemoval: true)]
     private Collection $accommodationImages;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: 'accommodations', fileNameProperty: 'image')]
+    private ?File $imageFile = null;
 
     public function __construct()
     {
@@ -93,12 +103,12 @@ class Accommodation
 
     public function getNbrMaxPerson(): ?int
     {
-        return $this->NbrMaxPerson;
+        return $this->nbrMaxPerson;
     }
 
     public function setNbrMaxPerson(int $NbrMaxPerson): self
     {
-        $this->NbrMaxPerson = $NbrMaxPerson;
+        $this->nbrMaxPerson = $NbrMaxPerson;
 
         return $this;
     }
@@ -203,5 +213,42 @@ class Accommodation
         }
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 }

@@ -5,14 +5,14 @@
 {% block body %}
 <h1>{{ accommodation.title }}</h1>
 
+{% for image in accommodation.accommodationImages %}
+    <img src="{{ asset(image.path) }}" alt="Photo de {{ accommodation.title }}">
+{% endfor %}
+
 <div class="container">
-    {% for accommodation in accommodations %}
-        <div class="col">
-            <h2>{{ booking.title }}</h2>
-            <p>{{ booking.description | striptags | u.truncate(6, '...', true) }}</p>
-            <a>Voir</a>
-        </div>
-    {% endfor %}
+    {{ accommodation.description | raw }}
 </div>
+
+{{ accommodation.nightPrice|format_currency('EUR', locale='fr') }} par nuit
 
 {% endblock %}

@@ -14,7 +14,7 @@ class AccommodationController extends AbstractController
     public function list(AccommodationRepository $accommodationRepository): Response
     {
         return $this->render('accommodation/list.html.twig', [
-           'accommodations' => $accommodationRepository->findAll(),
+            'accommodations' => $accommodationRepository->findAll(),
         ]);
     }
 
@@ -25,6 +25,6 @@ class AccommodationController extends AbstractController
         return $this->render('accommodation/show.html.twig', [
             //'accommodation' => $accommodationRepository->find($id),
             'accommodation' => $accommodation,
-         ]);
+        ]);
     }
 }
